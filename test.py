@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import news_2_pdf
+import channel2pdf
 import os
 import sys
 
 def test():
-	# news_2_pdf.gen(news_source='bbc')
-	pdf_name = news_2_pdf.gen(news_source='bbc英文')
+	pdf_name = channel2pdf.gen('equality_and_rights')
+	os.system('open %s -g' % pdf_name)
+	pdf_name = channel2pdf.gen('social_justice_watch')
 	os.system('open %s -g' % pdf_name)
 	
 test()

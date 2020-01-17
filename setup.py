@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="news_2_pdf",
-    version="0.0.11",
+    name="channel2pdf",
+    version="0.0.1",
     author="Yunzhi Gao",
     author_email="gaoyunzhi@gmail.com",
-    description="Generate international news in pdf.",
+    description="Export Telegram Channel to PDF",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/gaoyunzhi/news_2_pdf",
+    url="https://github.com/gaoyunzhi/channel2pdf",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

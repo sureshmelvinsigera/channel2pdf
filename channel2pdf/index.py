@@ -4,13 +4,13 @@ from bs4 import BeautifulSoup
 def cleanName(name):
     return name.replace('#', '')
 
-def getIndexHtml(news_source, links):
+def getIndexHtml(name, source, links):
 	today = date.today().strftime("%m%d")
 
 	index_html = '''
 <html>
    <body>
-     <h1>今日新闻 %s %s</h1>
+     <h1>%s %s</h1>
      <br/>
      <p style="text-indent:0pt">
      </p>
@@ -18,16 +18,16 @@ def getIndexHtml(news_source, links):
      <br/>
      <p style="text-indent:0pt">
      	来源：
-     	<a href="https://t.me/news_pdf">新闻播报</a>
+     	<a href="https://t.me/%s">%s</a>
      </p>
    </body>
 </html>
-	''' % (news_source.upper(), today)
+	''' % (name, today, source, name)
 
 	soup = BeautifulSoup(index_html, 'html.parser')
 	content_list = soup.find('p')
-	for name in links:
-		item = '<a href="%s.html">%s</a>' % (cleanName(name), cleanName(name))
+	for _, title in links.items():
+		item = '<a href="%s.html">%s</a>' % (cleanName(title), cleanName(title))
 		content_list.append(BeautifulSoup(item, 'html.parser'))
 		content_list.append(BeautifulSoup('<br/><br/>', 'html.parser'))
 	return str(soup)
