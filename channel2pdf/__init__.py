@@ -5,7 +5,7 @@ name = 'channel2pdf'
 
 import os
 from .find_resource import findResource
-from .article import getArticleHtml
+from .article import getArticleHtml, getCustomHtml
 from .index import getIndexHtml, cleanName
 from datetime import date
 
@@ -21,7 +21,6 @@ def gen(source, ebook_convert_app=ebook_convert_app):
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
 
-	print(links)
 	for link, title in links.copy().items():
 		html = getArticleHtml(title, link, filename + '.html')
 		if html:
@@ -29,8 +28,6 @@ def gen(source, ebook_convert_app=ebook_convert_app):
 				f.write(html)
 		else:
 			del links[link]
-
-	print(links)
 
 	index_html_name = 'html_result/%s.html' % filename
 	with open(index_html_name, 'w') as f:

@@ -1,6 +1,25 @@
 from bs4 import BeautifulSoup
 import readee
 
+def getHtml(name, soup, index_loc):
+	return '''
+<html>
+	<body>
+		<title>%s</title>
+		<h1>%s</h1>
+		<div><a href="%s">返回目录</a></div>
+		%s
+		<div><br/><a href="%s">返回目录</a></div>
+	</body>
+</html>
+	''' % (name, name, index_loc, str(soup), index_loc)
+
+def getCustomHtml(name, content, index_loc):
+	raw = []
+	for x, y in content:
+		raw.append('<div>%s%s</div>' % (x, y))
+	getHtml(name, ''.join(raw), index_loc)
+	
 def fact():
 	return BeautifulSoup("<div></div>", features="lxml")
 
@@ -21,15 +40,7 @@ def getArticleHtml(name, link, index_loc):
 		item.replace_with(new_item)
 	if len(soup.text) < 100:
 		return
-	return '''
-<html>
-	<body>
-		<title>%s</title>
-		<h1>%s</h1>
-		<div><a href="%s">返回目录</a></div>
+	return getHtml(name, '''
 		%s
 		<div><br/><a href="%s">原文</a></div>
-		<div><br/><a href="%s">返回目录</a></div>
-	</body>
-</html>
-	''' % (name, name, index_loc, str(soup), link, index_loc)
+	''' % str(soup), index_loc)
