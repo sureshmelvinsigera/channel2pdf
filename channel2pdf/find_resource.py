@@ -5,7 +5,7 @@ from telegram_util import matchKey
 import cached_url
 from datetime import date
 
-LINK_PREFIX = 'https://telete.in/s/'
+LINK_PREFIX = 'https://t.me/s/'
 
 def findResource(source):
 	soup = BeautifulSoup(cached_url.get(LINK_PREFIX + source), 'html.parser')

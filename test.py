@@ -8,7 +8,7 @@ import sys
 def test():
 	pdf_name = channel2pdf.gen('equality_and_rights')
 	os.system('open %s -g' % pdf_name)
-	pdf_name = channel2pdf.gen('social_justice_watch')
-	os.system('open %s -g' % pdf_name)
+	# pdf_name = channel2pdf.gen('social_justice_watch')
+	# os.system('open %s -g' % pdf_name)
 	
 test()
