@@ -21,8 +21,15 @@ def gen(source, ebook_convert_app=ebook_convert_app):
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
 
+	links['图集精选'] = '图集精选'
+	links['消息精选'] = '消息精选'
 	for link, title in links.copy().items():
-		html = getArticleHtml(title, link, filename + '.html')
+		if title == '图集精选':
+			html = getCustomHtml(title, pics, filename + '.html')
+		elif title == '消息精选':
+			html = getCustomHtml(title, texts, filename + '.html')
+		else:
+			html = getArticleHtml(title, link, filename + '.html')
 		if html:
 			with open('html_result/%s.html' % cleanName(title), 'w') as f:
 				f.write(html)

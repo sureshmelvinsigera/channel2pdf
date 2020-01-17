@@ -34,11 +34,13 @@ def getIndexHtml(name, source, links):
 	content_list = soup.find('p')
 	titles = []
 	for _, title in links.items():
-		if isCN(title):
-			titles.insert(0, title)
+		if '精选' in title:
+			titles.append((1, title))
+		elif isCN(title):
+			titles.append((0, title))
 		else:
-			titles.append(title)
-	for title in titles:
+			titles.append((2, title))
+	for _, title in sorted(titles):
 		item = '<a href="%s.html">%s</a>' % (cleanName(title), cleanName(title))
 		content_list.append(BeautifulSoup(item, 'html.parser'))
 		content_list.append(BeautifulSoup('<br/><br/>', 'html.parser'))
