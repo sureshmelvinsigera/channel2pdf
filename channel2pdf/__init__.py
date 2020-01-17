@@ -17,6 +17,7 @@ else:
 def gen(source, ebook_convert_app=ebook_convert_app):
 	name, links, pics, texts = findResource(source)
 	filename = '%s_%s' % (date.today().strftime("%m%d"), name)
+	filename = filename.replace(' ', '_')
 
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
