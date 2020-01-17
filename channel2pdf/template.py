@@ -15,10 +15,6 @@ def getArticleHtml(name, link, index_loc):
 		new_soup = f(soup)
 		if new_soup:
 			soup = new_soup
-	for item in soup.find_all('h2'):
-		new_item = fact().new_tag('h4')
-		new_item.string = item.text
-		item.replace_with(new_item)
 	if len(soup.text) < 100:
 		return
 	return '''
