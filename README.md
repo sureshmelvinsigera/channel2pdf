@@ -6,7 +6,7 @@ Export Telegram Channel to PDF
 
 ```
 import channel2pdf
-new_2_pdg.gen(CHANNEL_USERNAME)
+channel2pdf.gen(CHANNEL_USERNAME)
 ```
 
 ## how to install
