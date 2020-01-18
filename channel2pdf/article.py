@@ -15,6 +15,8 @@ def getHtml(name, soup, index_loc):
 	''' % (name, name, index_loc, str(soup), index_loc)
 
 def getCustomHtml(name, content, index_loc):
+	if not content:
+		return
 	raw = []
 	for x, y in content:
 		raw.append('<div>%s%s</div>' % (x, y))

@@ -38,6 +38,8 @@ def findResource(source):
 		if item.find('a', class_='tgme_widget_message_photo_wrap'):
 			continue
 		preview = item.find('a', class_='tgme_widget_message_link_preview')
+		if not preview:
+			continue
 		preview.name = 'div'
 		text = item.find('div', class_='tgme_widget_message_text')
 		texts.append((text, preview))
