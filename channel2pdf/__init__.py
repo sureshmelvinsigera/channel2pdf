@@ -8,6 +8,7 @@ from .find_resource import findResource
 from .article import getArticleHtml, getCustomHtml
 from .index import getIndexHtml
 from datetime import date
+from telegram_util import cleanFileName
 
 if os.name == 'posix':
 	ebook_convert_app = '/Applications/calibre.app/Contents/MacOS/ebook-convert'
@@ -32,7 +33,7 @@ def gen(source, ebook_convert_app=ebook_convert_app):
 		else:
 			html = getArticleHtml(title, link, filename + '.html')
 		if html:
-			with open('html_result/%s.html' % cleanName(title), 'w') as f:
+			with open('html_result/%s.html' % cleanFileName(title), 'w') as f:
 				f.write(html)
 		else:
 			del links[link]
