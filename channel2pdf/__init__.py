@@ -6,7 +6,7 @@ name = 'channel2pdf'
 import os
 from .find_resource import findResource
 from .article import getArticleHtml, getCustomHtml
-from .index import getIndexHtml, cleanName
+from .index import getIndexHtml
 from datetime import date
 
 if os.name == 'posix':
