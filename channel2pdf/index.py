@@ -39,7 +39,7 @@ def getIndexHtml(name, source, links):
 		else:
 			titles.append((2, title))
 	for _, title in sorted(titles):
-		item = '<a href="%s.html">%s</a>' % 
+		item = '<a href="%s.html">%s</a>' % \
 			(cleanFileName(title), cleanFileName(title))
 		content_list.append(BeautifulSoup(item, 'html.parser'))
 		content_list.append(BeautifulSoup('<br/><br/>', 'html.parser'))
