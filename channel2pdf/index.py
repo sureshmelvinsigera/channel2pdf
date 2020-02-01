@@ -1,9 +1,7 @@
 from datetime import date
 from bs4 import BeautifulSoup
 import re
-
-def cleanName(name):
-	return name.replace('#', '')
+from telegram_util import cleanFileName
 
 def isCN(title):
 	if re.search(u'[\u4e00-\u9fff]', title):
@@ -41,7 +39,8 @@ def getIndexHtml(name, source, links):
 		else:
 			titles.append((2, title))
 	for _, title in sorted(titles):
-		item = '<a href="%s.html">%s</a>' % (cleanName(title), cleanName(title))
+		item = '<a href="%s.html">%s</a>' % 
+			(cleanFileName(title), cleanFileName(title))
 		content_list.append(BeautifulSoup(item, 'html.parser'))
 		content_list.append(BeautifulSoup('<br/><br/>', 'html.parser'))
 	return str(soup)
