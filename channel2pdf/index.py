@@ -24,7 +24,6 @@ def getIndexHtml(name, source, links):
 		来源：
 		<a href="https://t.me/%s">%s</a>
 	 </p>
-	 <br/>
 	 <p style="text-indent:0pt">
 		<a href="https://github.com/gaoyunzhi/telegram_news_2_pdf_bot/tree/master/pdf_result">镜像</a>
 	 </p>
