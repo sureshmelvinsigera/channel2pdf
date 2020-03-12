@@ -15,9 +15,9 @@ if os.name == 'posix':
 else:
 	ebook_convert_app = 'ebook-convert'
 
-def gen(source, ebook_convert_app=ebook_convert_app):
+def gen(source, ebook_convert_app=ebook_convert_app, additional_setting='', filename_suffix = ''):
 	name, links, pics, texts = findResource(source)
-	filename = '%s_%s' % (date.today().strftime("%m%d"), name)
+	filename = '%s_%s' % (date.today().strftime("%m%d"), name) + filename_suffix
 	filename = filename.replace(' ', '_')
 
 	os.system('rm -rf html_result')	
@@ -44,7 +44,8 @@ def gen(source, ebook_convert_app=ebook_convert_app):
 
 	os.system('mkdir pdf_result > /dev/null 2>&1')
 	pdf_name = 'pdf_result/%s.pdf' % filename
-	os.system('%s %s %s > /dev/null 2>&1' % (ebook_convert_app, index_html_name, pdf_name))
+	os.system('%s %s %s %s > /dev/null 2>&1' % \
+		(ebook_convert_app, index_html_name, pdf_name, additional_setting))
 	return pdf_name
 		
 
