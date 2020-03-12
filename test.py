@@ -19,4 +19,5 @@ def test():
 	# pdf_name = channel2pdf.gen('social_justice_watch')
 	# os.system('open %s -g' % pdf_name)
 	
-test()
+if __name__=='__main__':
+	test()
