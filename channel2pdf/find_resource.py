@@ -26,23 +26,22 @@ def findResource(source):
 		title = item.find('div', class_='link_preview_title').text
 		links[item['href']] = title
 	pics = []
-	for item in soup.find_all('a', class_='tgme_widget_message_photo_wrap'):
-		text = item.parent.find('div', class_='tgme_widget_message_text')
-		src = findSrc(item['style'])
-		img = '<figure><img src="%s"/></figure>' % src
-		pics.append((img, text or ''))
+	for item in soup.find_all('div', class_='tgme_widget_message_bubble'):
+		imgs = []
+		for pic in item.find_all('a', class_='tgme_widget_message_photo_wrap'):
+			imgs.append('<figure><img src="%s"/></figure>' % findSrc(pic['style']))
+		text = item.find('div', class_='tgme_widget_message_text')
+		if imgs:
+			pics.append((''.join(imgs), text or ''))
 	texts = []
 	for item in soup.find_all('div', class_='tgme_widget_message_wrap'):
-		if 'telegra.ph' in item.text:
-			continue
 		if item.find('a', class_='tgme_widget_message_photo_wrap'):
 			continue
 		preview = item.find('a', class_='tgme_widget_message_link_preview')
-		if not preview:
-			continue
-		preview.name = 'div'
+		if preview:
+			preview.name = 'div'
 		text = item.find('div', class_='tgme_widget_message_text')
-		texts.append((text, preview))
+		texts.append((text, preview or ''))
 	return name, links, pics, texts
 
 	
