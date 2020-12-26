@@ -22,6 +22,7 @@ def findSrc(raw):
 	return raw[:index]
 
 def getLink(post):
+	print('t.me/' + post.getKey(), post.text, post.link)
 	if not post.link:
 		return
 	return tuple([item['href'] for item in 
@@ -72,8 +73,8 @@ def findResource(source):
 			preview.name = 'div'
 		text = item.find('div', class_='tgme_widget_message_text')
 		texts.append((text, preview or ''))
-	if len(links) == 0:
-		links = findLinks(source)
+	# if len(links) == 0:
+	# 	links = findLinks(source)
 	return name, links, pics, texts
 
 	
