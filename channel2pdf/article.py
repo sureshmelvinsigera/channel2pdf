@@ -22,11 +22,16 @@ def getCustomHtml(name, content, index_loc):
 		raw.append('<div>%s%s</div>' % (x, y))
 	return getHtml(name, '<br/><br/>' + '<br/><hr/><br/>'.join(raw), index_loc)
 
-def getArticleHtml(name, link, index_loc):
-	soup = readee.export(link)
-	if len(soup.text) < 100:
+def getArticleHtml(name, link_list, index_loc):
+	result = ''
+	for link in link_list: 
+		soup = readee.export(link)
+		if len(soup.text) < 100:
+			continue
+		result += str(soup)
+	if not result:
 		return
 	return getHtml(name, '''
 		%s
 		<div><br/><a href="%s">原文</a></div>
-	''' % (str(soup), link), index_loc)
+	''' % (result, link), index_loc)

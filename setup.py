@@ -20,10 +20,13 @@ setuptools.setup(
     ],
     install_requires=[
         'bs4',
-        'telegram_util>=0.0.30',
-        'cached_url>=0.0.1',
+        'telegram_util',
+        'cached_url',
         'pyyaml',
-        'readee>=0.0.14'
+        'readee'
+        'webgram',
+        'plain_db',
+        'export_to_telegraph',
     ],
     python_requires='>=3.0',
 )
