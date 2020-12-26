@@ -57,6 +57,8 @@ def findResource(source):
 		texts.append((text, preview or ''))
 	if len(links) == 0:
 		links = findLinks(source)
+	if name == 'MengyShare':
+		name = '端传媒'
 	return name, links, pics, texts
 
 	
