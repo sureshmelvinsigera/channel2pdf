@@ -6,11 +6,6 @@ import cached_url
 from .find_links import findLinks
 from datetime import date
 import re
-import webgram
-import plain_db
-import export_to_telegraph
-
-last_msg = plain_db.load('last_msg')
 
 LINK_PREFIX = 'https://t.me/s/'
 

@@ -24,10 +24,7 @@ setuptools.setup(
         'cached_url',
         'pyyaml',
         'readee'
-        'webgram',
-        'plain_db',
-        'export_to_telegraph',
-        'pyrogram',
+        'telethon',
     ],
     python_requires='>=3.0',
 )
