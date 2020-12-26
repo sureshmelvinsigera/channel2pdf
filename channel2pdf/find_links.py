@@ -27,7 +27,7 @@ def findLinks(source):
         except:
             continue
         links[tuple([item.url for item in message.entities])] = (
-            message.media.webpage.title[11:-20])
-        print(message.media.webpage.title[11:-20])
+            message.media.webpage.title[11:-21])
+        print(message.media.webpage.title[11:-21])
     return links
     
