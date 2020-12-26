@@ -11,6 +11,7 @@ def test():
 		'--pdf-page-margin-bottom 15'
 	pdf_name = channel2pdf.gen('mengyshare')
 	os.system('open %s -g' % pdf_name)
+	channel2pdf.gen('mengyshare', filename_suffix='_大字版', additional_setting=additional_setting)
 	# pdf_name = channel2pdf.gen('pincongessence',
 	# 	filename_suffix='_大字版', additional_setting=additional_setting)
 	# pdf_name = channel2pdf.gen('equality_and_rights')

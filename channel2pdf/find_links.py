@@ -12,12 +12,14 @@ async def findLinksAsync(source):
     channel_entity=await client.get_entity(source)
     posts = await client(GetHistoryRequest(peer=channel_entity, limit=30, # change to 30
         offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
+    await client.disconnect()
     return posts
 
 def findLinks(source):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     r = loop.run_until_complete(findLinksAsync(source))
+    loop.close()
     links = {}
     for message in r.messages:
         try:
