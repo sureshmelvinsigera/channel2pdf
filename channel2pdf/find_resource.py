@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import yaml
 from telegram_util import matchKey
 import cached_url
+from .find_links import findLinks
 from datetime import date
 import re
 import webgram
@@ -27,25 +28,6 @@ def getLink(post):
 		return
 	return tuple([item['href'] for item in 
 		soup.find_all('a') if item.get('href')]), post.link
-
-def findLinks(source):
-	last_msg_id = last_msg.get(source) or 1
-	links = {}
-	for msg_id in range(last_msg_id + 1, last_msg_id + 50):
-		r = getLink(webgram.getPost(source, msg_id))
-		if not r:
-			continue
-		last_msg.update(source, msg_id)
-		links[r[0]] = r[1]
-	for msg_id in range(last_msg_id, last_msg_id - 50, -1):
-		if len(links) > 10:
-			return links
-		r = getLink(webgram.getPost(source, msg_id))
-		if not r:
-			continue
-		links[r[0]] = r[1]
-	return links
-
 
 def findResource(source):
 	soup = BeautifulSoup(cached_url.get(LINK_PREFIX + source), 'html.parser')

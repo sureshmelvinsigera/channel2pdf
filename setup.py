@@ -27,6 +27,7 @@ setuptools.setup(
         'webgram',
         'plain_db',
         'export_to_telegraph',
+        'pyrogram',
     ],
     python_requires='>=3.0',
 )
