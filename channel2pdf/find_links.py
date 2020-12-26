@@ -5,7 +5,7 @@ import yaml
 with open('credential') as f:
 	credential = yaml.load(f, Loader=yaml.FullLoader)
 
-client = TelegramClient('session_file', credential['api_id'], credential['api_hash'], update_workers=4, spawn_read_thread=False)
+client = TelegramClient('session_file', credential['api_id'], credential['api_hash'])
 client.start(password=credential['password'])
 
 
