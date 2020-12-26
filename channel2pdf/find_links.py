@@ -15,12 +15,9 @@ async def findLinksAsync(source):
     return posts
 
 def findLinks(source):
-    print(1)
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    print(1.5)
     r = loop.run_until_complete(findLinksAsync(source))
-    print(2)
     links = {}
     for message in r.messages:
         try:
