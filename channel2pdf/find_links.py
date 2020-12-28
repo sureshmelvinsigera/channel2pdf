@@ -24,6 +24,7 @@ def findLinks(source):
     for message in r.messages:
         try:
             message.media.webpage
+            message.media.webpage.title
         except:
             continue
         links[tuple([item.url for item in message.entities])] = (
