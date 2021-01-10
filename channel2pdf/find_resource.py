@@ -51,6 +51,7 @@ def findResource(source):
 		text = item.find('div', class_='tgme_widget_message_text')
 		texts.append((text, preview or ''))
 	if len(links) == 0:
+		print('no links', name)
 		links = findLinks(source)
 	if name == 'MengyShare':
 		name = '端传媒'

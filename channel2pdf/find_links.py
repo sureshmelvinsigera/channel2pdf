@@ -27,8 +27,13 @@ def findLinks(source):
             message.media.webpage.title
         except:
             continue
-        links[tuple([item.url for item in message.entities])] = (
-            message.media.webpage.title[11:-21]).strip()
+        keys = []
+        for item in message.entities:
+            try:
+                keys.append(item.url)
+            except:
+                print('no item.url', item)
+        links[tuple(keys)] = (message.media.webpage.title[11:-21]).strip()
         if len(links) == 8:
             return links
     return links
