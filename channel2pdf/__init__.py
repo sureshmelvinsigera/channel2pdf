@@ -32,7 +32,7 @@ def gen(source, ebook_convert_app=ebook_convert_app, additional_setting='', file
 			html = getCustomHtml(title, texts, filename + '.html')
 		else:
 			html = getArticleHtml(title, link, filename + '.html')
-		if html:
+		if title and html:
 			with open('html_result/%s.html' % cleanFileName(title), 'w') as f:
 				f.write(html)
 		else:
