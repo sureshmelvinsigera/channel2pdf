@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="channel2pdf",
-    version="0.0.19",
+    version="0.0.20",
     author="Yunzhi Gao",
     author_email="gaoyunzhi@gmail.com",
     description="Export Telegram Channel to PDF",
