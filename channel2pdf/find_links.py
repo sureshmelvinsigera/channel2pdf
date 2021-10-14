@@ -6,10 +6,20 @@ import asyncio
 with open('credential') as f:
     credential = yaml.load(f, Loader=yaml.FullLoader)
 
+async def get_entity(source):
+    credential['id_map'] = credential.get('id_map', {})
+    if source not in credential['id_map']:
+        entity = await client.get_entity(source)
+        credential['id_map'][source] = entity.id
+        with open('credential') as f:
+            f.write(yaml.dump(credential, sort_keys=True, indent=2, allow_unicode=True))
+    return await client.get_entity(id_map[source])
+
 async def findLinksAsync(source):
     client = TelegramClient('session_file', credential['api_id'], credential['api_hash'])
     await client.start(password=credential['password'])
-    channel_entity=await client.get_entity(source)
+    await client.get_dialogs()
+    channel_entity=await get_entity(source)
     posts = await client(GetHistoryRequest(peer=channel_entity, limit=30, # change to 30
         offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
     await client.disconnect()
