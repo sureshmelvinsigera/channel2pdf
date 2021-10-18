@@ -13,7 +13,7 @@ async def get_entity(client, source):
         credential['id_map'][source] = entity.id
         with open('credential') as f:
             f.write(yaml.dump(credential, sort_keys=True, indent=2, allow_unicode=True))
-    return await client.get_entity(id_map[source])
+    return await client.get_entity(credential['id_map'][source])
 
 async def findLinksAsync(source):
     client = TelegramClient('session_file', credential['api_id'], credential['api_hash'])
