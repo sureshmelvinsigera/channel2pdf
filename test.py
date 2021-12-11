@@ -20,5 +20,10 @@ def test():
 	# pdf_name = channel2pdf.gen('social_justice_watch')
 	# os.system('open %s -g' % pdf_name)
 	
+def testGenIndex(channel_id, start_index):
+	link = channel2pdf.genIndex(channel_id, start_index)
+	print(link)
+	os.system('open %s -g' % link)
+
 if __name__=='__main__':
-	test()
+	testGenIndex(1398408321, 959)

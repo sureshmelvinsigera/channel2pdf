@@ -9,6 +9,7 @@ from .article import getArticleHtml, getCustomHtml
 from .index import getIndexHtml
 from datetime import date
 from telegram_util import cleanFileName
+from .gen_index import genIndex
 
 if os.name == 'posix':
 	ebook_convert_app = '/Applications/calibre.app/Contents/MacOS/ebook-convert'

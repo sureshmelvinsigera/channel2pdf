@@ -11,7 +11,7 @@ async def get_entity(client, source):
     if source not in credential['id_map']:
         entity = await client.get_entity(source)
         credential['id_map'][source] = entity.id
-        with open('credential') as f:
+        with open('credential', 'w') as f:
             f.write(yaml.dump(credential, sort_keys=True, indent=2, allow_unicode=True))
     return await client.get_entity(credential['id_map'][source])
 
