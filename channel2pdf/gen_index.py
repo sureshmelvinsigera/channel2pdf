@@ -6,6 +6,7 @@ from telethon import TelegramClient
 from telethon.tl.functions.messages import GetHistoryRequest
 import yaml
 import asyncio
+import time
 
 with open('credential') as f:
     credential = yaml.load(f, Loader=yaml.FullLoader)
@@ -25,15 +26,17 @@ async def findMessages(channel_id, start_index):
     await client.get_dialogs()
     channel_entity=await get_entity(client, channel_id)
     messages = []
-    for i in range(3):
+    for i in range(1, 4):
         posts = await client(GetHistoryRequest(peer=channel_entity, limit=100,
-            offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=start + i * 100, hash=0))
-        messages += post.messages
+            offset_date=None, offset_id=start_index + i * 100, max_id=0, min_id=0, add_offset=0, hash=0))
+        messages += posts.messages
     await client.disconnect()
     return channel_entity, messages
 
 def getList(db):
     real_index = 0
+    raw = 0
+    posts = []
     while real_index < len(db):
         raw += 1
         if raw not in db:
@@ -55,13 +58,12 @@ def post(source, db):
     text = '''  
 <div>
     <p><strong>【频道简介】</strong></p>
-    <p>%s</p>
     <p><a href="%s">点此进入频道</a></p>
     <br/>
     <p><strong>【索引】</strong></p>
     %s
 </div>
-    ''' % (source.description.split()[0], author_url, content)
+    ''' % (author_url, content)
     r = p.post(
         title = '【频道手册】%s ' % source.title,
         author = source.title, 
@@ -74,10 +76,19 @@ def genIndex(channel_id, start_index):
     asyncio.set_event_loop(loop)
     channel, messages = loop.run_until_complete(findMessages(channel_id, start_index))
     loop.close()
-    print(channel)
-    for message in messages:
-        print(message)
-        print(message.media.file)
-        print(message.file)
-        db[message.message_id] = '1', 'https://t.me/%s/%d' % (channel.username, message_id)
-    post(source, db)
+    db = {}
+    last_filename = ''
+    messages = [(message.id, time.time(), message) for message in messages]
+    messages.sort()
+    for message_id, _, message in messages:
+        try:
+            message.media.document.attributes[0].file_name
+        except:
+            continue
+        filename = message.media.document.attributes[0].file_name
+        filename = filename.split('（')[0].split('.')[0]
+        if last_filename == filename:
+            continue
+        last_filename = filename
+        db[message.id] = filename, 'https://t.me/%s/%d' % (channel.username, message.id)
+    return post(channel, db)
