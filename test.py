@@ -26,4 +26,5 @@ def testGenIndex(channel_id, start_index):
 	os.system('open %s -g' % link)
 
 if __name__=='__main__':
-	testGenIndex(1398408321, 959)
+	# testGenIndex(1398408321, 959)
+	test()
